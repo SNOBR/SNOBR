@@ -1,0 +1,831 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>متجر إلكتروني | الصفحة الرئيسية</title>
+    <style>
+        :root {
+            --primary: #6200EA;
+            --secondary: #03DAC6;
+            --dark: #121212;
+            --dark-surface: #1E1E1E;
+            --gray: #333333;
+            --light-gray: #4F4F4F;
+            --text: #FFFFFF;
+            --text-secondary: #B3B3B3;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', 'Segoe UI', sans-serif;
+        }
+        
+        body {
+            background-color: var(--dark);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: var(--dark-surface);
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--text);
+            text-decoration: none;
+        }
+        
+        .logo span {
+            color: var(--secondary);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-right: 1.5rem;
+        }
+        
+        nav ul li a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--secondary);
+        }
+        
+        .icons {
+            display: flex;
+            align-items: center;
+        }
+        
+        .icon {
+            color: var(--text);
+            margin-right: 1.2rem;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .icon:hover {
+            color: var(--secondary);
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(18, 18, 18, 0.8), rgba(18, 18, 18, 0.8)), url('/api/placeholder/1200/500') center/cover no-repeat;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            padding: 0 2rem;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background-color: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #7C4DFF;
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--secondary);
+            color: var(--secondary);
+            margin-right: 1rem;
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--secondary);
+            color: var(--dark);
+        }
+        
+        .featured {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-header h2 {
+            font-size: 2rem;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 0.5rem;
+        }
+        
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 25%;
+            width: 50%;
+            height: 3px;
+            background-color: var(--secondary);
+        }
+        
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .product {
+            background-color: var(--dark-surface);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .product:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .product-img {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+        }
+        
+        .product-info {
+            padding: 1.5rem;
+        }
+        
+        .product-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .product-price {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+        
+        .product-description {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .add-to-cart {
+            width: 100%;
+            text-align: center;
+            padding: 0.8rem;
+            background-color: var(--primary);
+            border: none;
+            color: white;
+            font-weight: 500;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .add-to-cart:hover {
+            background-color: #7C4DFF;
+        }
+        
+        .categories {
+            padding: 4rem 2rem;
+            background-color: var(--dark-surface);
+        }
+        
+        .category-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .category {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+        
+        .category img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .category:hover img {
+            transform: scale(1.1);
+        }
+        
+        .category-info {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            padding: 1rem;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+        }
+        
+        .category-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.3rem;
+        }
+        
+        .category-count {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        footer {
+            background-color: var(--dark-surface);
+            padding: 3rem 2rem;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-section h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--secondary);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+        
+        .social-links {
+            display: flex;
+            margin-top: 1rem;
+        }
+        
+        .social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: var(--gray);
+            border-radius: 50%;
+            margin-left: 1rem;
+            transition: background-color 0.3s;
+        }
+        
+        .social-icon:hover {
+            background-color: var(--primary);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding: 1.5rem;
+            background-color: var(--gray);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                margin: 1rem 0;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .btn {
+                display: block;
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="#" class="logo">متجر<span>نا</span></a>
+            <nav>
+                <ul>
+                    <li><a href="#">الرئيسية</a></li>
+                    <li><a href="#">التصنيفات</a></li>
+                    <li><a href="#">منتجات جديدة</a></li>
+                    <li><a href="#">خصومات</a></li>
+                    <li><a href="#">تواصل معنا</a></li>
+                </ul>
+            </nav>
+            <div class="icons">
+                <div class="icon search-icon" style="position: relative; cursor: pointer;">
+                    <i>🔍</i>
+                    <div class="search-dropdown" style="display: none; position: absolute; top: 100%; left: 0; background-color: var(--dark-surface); width: 300px; padding: 1rem; border-radius: 8px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); z-index: 1000;">
+                        <input type="text" placeholder="ابحث عن منتجات..." style="width: 100%; padding: 0.8rem; background-color: var(--gray); border: none; border-radius: 4px; color: var(--text); margin-bottom: 0.5rem;">
+                        <div style="display: flex; flex-wrap: wrap; margin-top: 0.5rem;">
+                            <span style="background-color: var(--gray); color: var(--text-secondary); padding: 0.3rem 0.6rem; border-radius: 20px; margin: 0.2rem; font-size: 0.8rem; cursor: pointer;">سماعات</span>
+                            <span style="background-color: var(--gray); color: var(--text-secondary); padding: 0.3rem 0.6rem; border-radius: 20px; margin: 0.2rem; font-size: 0.8rem; cursor: pointer;">هواتف</span>
+                            <span style="background-color: var(--gray); color: var(--text-secondary); padding: 0.3rem 0.6rem; border-radius: 20px; margin: 0.2rem; font-size: 0.8rem; cursor: pointer;">ساعات ذكية</span>
+                            <span style="background-color: var(--gray); color: var(--text-secondary); padding: 0.3rem 0.6rem; border-radius: 20px; margin: 0.2rem; font-size: 0.8rem; cursor: pointer;">أجهزة لوحية</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="icon user-icon" style="position: relative; cursor: pointer;">
+                    <i>👤</i>
+                <div class="user-dropdown" style="display: none; position: absolute; top: 100%; left: 0; background-color: var(--dark-surface); width: 320px; padding: 1.5rem; border-radius: 8px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); z-index: 1000;">
+                        <h4 style="margin-bottom: 1rem; font-size: 1.1rem; text-align: center;">تسجيل الدخول</h4>
+                        <form>
+                            <div style="margin-bottom: 1rem;">
+                                <label style="display: block; margin-bottom: 0.3rem; font-size: 0.9rem;">البريد الإلكتروني</label>
+                                <input type="email" placeholder="أدخل بريدك الإلكتروني" style="width: 100%; padding: 0.8rem; background-color: var(--gray); border: none; border-radius: 4px; color: var(--text);">
+                            </div>
+                            <div style="margin-bottom: 1.5rem;">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 0.3rem;">
+                                    <label style="font-size: 0.9rem;">كلمة المرور</label>
+                                    <a href="#" style="font-size: 0.8rem; color: var(--secondary);">نسيت كلمة المرور؟</a>
+                                </div>
+                                <input type="password" placeholder="أدخل كلمة المرور" style="width: 100%; padding: 0.8rem; background-color: var(--gray); border: none; border-radius: 4px; color: var(--text);">
+                            </div>
+                            <div style="margin-bottom: 1rem;">
+                                <label style="display: flex; align-items: center;">
+                                    <input type="checkbox" style="margin-left: 0.5rem;">
+                                    <span style="font-size: 0.9rem;">تذكرني</span>
+                                </label>
+                            </div>
+                            <button type="submit" style="width: 100%; padding: 0.8rem; background-color: var(--primary); color: white; border: none; border-radius: 4px; font-weight: 500; margin-bottom: 1rem; cursor: pointer;">تسجيل الدخول</button>
+                        </form>
+                        <div style="text-align: center; margin-bottom: 1rem;">
+                            <span style="font-size: 0.9rem; color: var(--text-secondary);">أو</span>
+                        </div>
+                        <div style="display: flex; gap: 0.8rem; margin-bottom: 1.5rem;">
+                            <button style="flex: 1; padding: 0.7rem; background-color: #4267B2; color: white; border: none; border-radius: 4px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+                                <span style="margin-right: 0.5rem;">فيسبوك</span>
+                            </button>
+                            <button style="flex: 1; padding: 0.7rem; background-color: #DB4437; color: white; border: none; border-radius: 4px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+                                <span style="margin-right: 0.5rem;">جوجل</span>
+                            </button>
+                        </div>
+                        <div style="text-align: center;">
+                            <span style="font-size: 0.9rem;">ليس لديك حساب؟</span>
+                            <a href="#" style="color: var(--secondary); font-weight: 500; margin-right: 0.3rem;">إنشاء حساب جديد</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="icon cart-icon" style="position: relative; cursor: pointer;">
+                    <i>🛒</i>
+                    <span style="position: absolute; top: -5px; right: -5px; background-color: var(--secondary); color: var(--dark); width: 18px; height: 18px; border-radius: 50%; font-size: 0.7rem; display: flex; align-items: center; justify-content: center; font-weight: bold;">3</span>
+                    <div class="cart-dropdown" style="display: none; position: absolute; top: 100%; left: 0; background-color: var(--dark-surface); width: 350px; padding: 1.5rem; border-radius: 8px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); z-index: 1000;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                            <h4 style="margin: 0; font-size: 1.1rem;">سلة التسوق <span style="color: var(--text-secondary); font-size: 0.9rem;">(3 منتجات)</span></h4>
+                            <a href="#" style="color: var(--secondary); font-size: 0.9rem; text-decoration: none;">تفريغ السلة</a>
+                        </div>
+                        
+                        <div style="max-height: 300px; overflow-y: auto; margin-bottom: 1rem; padding-right: 0.3rem;">
+                            <div class="cart-item" style="display: flex; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--gray);">
+                                <img src="/api/placeholder/80/80" alt="منتج" style="width: 80px; height: 80px; border-radius: 6px; object-fit: cover; margin-left: 1rem;">
+                                <div style="flex: 1;">
+                                    <div style="display: flex; justify-content: space-between;">
+                                        <h5 style="margin: 0 0 0.3rem 0; font-size: 1rem;">سماعات لاسلكية فاخرة</h5>
+                                        <button style="background: none; border: none; color: var(--text-secondary); cursor: pointer; font-size: 1.2rem;">×</button>
+                                    </div>
+                                    <p style="margin: 0.2rem 0; font-size: 0.8rem; color: var(--text-secondary);">أسود • عرض خاص</p>
+                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.5rem;">
+                                        <div style="display: flex; align-items: center; background-color: var(--gray); border-radius: 4px; overflow: hidden;">
+                                            <button style="width: 28px; height: 28px; border: none; background-color: var(--gray); color: var(--text); cursor: pointer; font-size: 1.2rem;">-</button>
+                                            <span style="width: 30px; text-align: center; font-size: 0.9rem;">1</span>
+                                            <button style="width: 28px; height: 28px; border: none; background-color: var(--gray); color: var(--text); cursor: pointer; font-size: 1.2rem;">+</button>
+                                        </div>
+                                        <div>
+                                            <p style="margin: 0; font-weight: bold;">299 ريال</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="cart-item" style="display: flex; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--gray);">
+                                <img src="/api/placeholder/80/80" alt="منتج" style="width: 80px; height: 80px; border-radius: 6px; object-fit: cover; margin-left: 1rem;">
+                                <div style="flex: 1;">
+                                    <div style="display: flex; justify-content: space-between;">
+                                        <h5 style="margin: 0 0 0.3rem 0; font-size: 1rem;">ساعة ذكية رياضية</h5>
+                                        <button style="background: none; border: none; color: var(--text-secondary); cursor: pointer; font-size: 1.2rem;">×</button>
+                                    </div>
+                                    <p style="margin: 0.2rem 0; font-size: 0.8rem; color: var(--text-secondary);">أزرق • مقاومة للماء</p>
+                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.5rem;">
+                                        <div style="display: flex; align-items: center; background-color: var(--gray); border-radius: 4px; overflow: hidden;">
+                                            <button style="width: 28px; height: 28px; border: none; background-color: var(--gray); color: var(--text); cursor: pointer; font-size: 1.2rem;">-</button>
+                                            <span style="width: 30px; text-align: center; font-size: 0.9rem;">1</span>
+                                            <button style="width: 28px; height: 28px; border: none; background-color: var(--gray); color: var(--text); cursor: pointer; font-size: 1.2rem;">+</button>
+                                        </div>
+                                        <div>
+                                            <p style="margin: 0; font-weight: bold;">450 ريال</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="cart-item" style="display: flex; margin-bottom: 0.5rem;">
+                                <img src="/api/placeholder/80/80" alt="منتج" style="width: 80px; height: 80px; border-radius: 6px; object-fit: cover; margin-left: 1rem;">
+                                <div style="flex: 1;">
+                                    <div style="display: flex; justify-content: space-between;">
+                                        <h5 style="margin: 0 0 0.3rem 0; font-size: 1rem;">حقيبة ظهر عصرية</h5>
+                                        <button style="background: none; border: none; color: var(--text-secondary); cursor: pointer; font-size: 1.2rem;">×</button>
+                                    </div>
+                                    <p style="margin: 0.2rem 0; font-size: 0.8rem; color: var(--text-secondary);">أسود • حجم وسط</p>
+                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.5rem;">
+                                        <div style="display: flex; align-items: center; background-color: var(--gray); border-radius: 4px; overflow: hidden;">
+                                            <button style="width: 28px; height: 28px; border: none; background-color: var(--gray); color: var(--text); cursor: pointer; font-size: 1.2rem;">-</button>
+                                            <span style="width: 30px; text-align: center; font-size: 0.9rem;">1</span>
+                                            <button style="width: 28px; height: 28px; border: none; background-color: var(--gray); color: var(--text); cursor: pointer; font-size: 1.2rem;">+</button>
+                                        </div>
+                                        <div>
+                                            <p style="margin: 0; font-weight: bold;">199 ريال</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-top: 1.5rem; border-top: 1px dashed var(--gray); padding-top: 1rem;">
+                            <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                                <input type="text" placeholder="كود الخصم" style="flex: 1; padding: 0.8rem; background-color: var(--gray); border: none; border-radius: 4px 0 0 4px; color: var(--text);">
+                                <button style="padding: 0.8rem 1.2rem; background-color: var(--secondary); color: var(--dark); border: none; border-radius: 0 4px 4px 0; font-weight: 500; cursor: pointer;">تطبيق</button>
+                            </div>
+                            
+                            <div style="margin-bottom: 0.8rem; display: flex; justify-content: space-between;">
+                                <span>المجموع الفرعي:</span>
+                                <span>948 ريال</span>
+                            </div>
+                            
+                            <div style="margin-bottom: 0.8rem; display: flex; justify-content: space-between;">
+                                <span>الشحن:</span>
+                                <span style="color: var(--secondary);">مجاني</span>
+                            </div>
+                            
+                            <div style="margin-bottom: 1.5rem; display: flex; justify-content: space-between; font-weight: bold; font-size: 1.1rem;">
+                                <span>الإجمالي:</span>
+                                <span>948 ريال</span>
+                            </div>
+                            
+                            <div style="display: flex; gap: 0.5rem;">
+                                <a href="#" style="flex: 1; padding: 0.8rem; text-align: center; background-color: var(--gray); color: var(--text); text-decoration: none; border-radius: 4px; font-weight: 500;">عرض السلة</a>
+                                <a href="#" style="flex: 1; padding: 0.8rem; text-align: center; background-color: var(--primary); color: white; text-decoration: none; border-radius: 4px; font-weight: 500;">الدفع</a>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-top: 1.5rem; text-align: center;">
+                            <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 0.5rem;">طرق الدفع المتاحة:</p>
+                            <div style="display: flex; justify-content: center; gap: 0.8rem;">
+                                <span style="background-color: white; border-radius: 4px; padding: 0.3rem 0.5rem; display: inline-block; font-size: 0.9rem;">💳</span>
+                                <span style="background-color: white; border-radius: 4px; padding: 0.3rem 0.5rem; display: inline-block; color: #000; font-weight: bold; font-size: 0.7rem;">VISA</span>
+                                <span style="background-color: white; border-radius: 4px; padding: 0.3rem 0.5rem; display: inline-block; color: #000; font-weight: bold; font-size: 0.7rem;">MASTER</span>
+                                <span style="background-color: white; border-radius: 4px; padding: 0.3rem 0.5rem; display: inline-block; color: #000; font-weight: bold; font-size: 0.7rem;">MADA</span>
+                                <span style="background-color: white; border-radius: 4px; padding: 0.3rem 0.5rem; display: inline-block; font-size: 0.7rem;">Pay</span>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>تسوق بكل راحة مع متجرنا</h1>
+            <p>استكشف أحدث المنتجات وأفضل العروض والخصومات الحصرية على جميع التصنيفات</p>
+            <a href="#" class="btn btn-outline">عروض اليوم</a>
+            <a href="#" class="btn">تسوق الآن</a>
+        </div>
+    </section>
+
+    <section class="featured">
+        <div class="section-header">
+            <h2>منتجات مميزة</h2>
+        </div>
+        <!-- خيارات التصفية والفرز -->
+        <div class="filter-options" style="margin-bottom: 2rem; background-color: var(--dark-surface); padding: 1.5rem; border-radius: 8px;">
+            <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center;">
+                <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                    <label for="sort" style="margin-left: 1rem; font-weight: 500;">فرز حسب:</label>
+                    <select id="sort" style="padding: 0.5rem 1rem; background-color: var(--gray); color: var(--text); border: none; border-radius: 4px; cursor: pointer;">
+                        <option value="newest">الأحدث</option>
+                        <option value="price-low">السعر: من الأقل للأعلى</option>
+                        <option value="price-high">السعر: من الأعلى للأقل</option>
+                        <option value="popular">الأكثر شعبية</option>
+                        <option value="rating">التقييم</option>
+                    </select>
+                </div>
+                <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                    <label for="category" style="margin-left: 1rem; font-weight: 500;">التصنيف:</label>
+                    <select id="category" style="padding: 0.5rem 1rem; background-color: var(--gray); color: var(--text); border: none; border-radius: 4px; cursor: pointer;">
+                        <option value="all">الكل</option>
+                        <option value="electronics">إلكترونيات</option>
+                        <option value="fashion">أزياء</option>
+                        <option value="home">منزل ومطبخ</option>
+                        <option value="sports">رياضة</option>
+                    </select>
+                </div>
+                <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                    <label for="price-range" style="margin-left: 1rem; font-weight: 500;">نطاق السعر:</label>
+                    <input type="range" id="price-range" min="0" max="2000" step="100" value="2000" style="background-color: var(--gray); cursor: pointer;">
+                    <span id="price-value" style="margin-right: 1rem; min-width: 80px;">0-2000 ريال</span>
+                </div>
+            </div>
+            
+            <div style="margin-top: 1rem;">
+                <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                    <label style="display: flex; align-items: center; margin-left: 1rem;">
+                        <input type="checkbox" style="margin-left: 0.5rem;">
+                        <span>متوفر فقط</span>
+                    </label>
+                    <label style="display: flex; align-items: center; margin-left: 1rem;">
+                        <input type="checkbox" style="margin-left: 0.5rem;">
+                        <span>عروض خاصة</span>
+                    </label>
+                    <label style="display: flex; align-items: center; margin-left: 1rem;">
+                        <input type="checkbox" style="margin-left: 0.5rem;">
+                        <span>توصيل مجاني</span>
+                    </label>
+                    <label style="display: flex; align-items: center; margin-left: 1rem;">
+                        <input type="checkbox" style="margin-left: 0.5rem;">
+                        <span>منتجات جديدة</span>
+                    </label>
+                </div>
+            </div>
+            
+            <div style="display: flex; justify-content: space-between; margin-top: 1.5rem;">
+                <button style="padding: 0.5rem 1.5rem; background-color: transparent; color: var(--text-secondary); border: 1px solid var(--light-gray); border-radius: 4px; cursor: pointer;">إعادة تعيين</button>
+                <button style="padding: 0.5rem 1.5rem; background-color: var(--primary); color: white; border: none; border-radius: 4px; cursor: pointer;">تطبيق الفلتر</button>
+            </div>
+        </div>
+        
+        <div class="products">
+            <div class="product">
+                <div style="position: relative;">
+                    <img src="https://i.pinimg.com/236x/3a/de/66/3ade665d612154916636d86855a7b2e0.jpg" alt="منتج" class="product-img">
+                    <div style="position: absolute; top: 10px; right: 10px; background-color: var(--primary); color: white; padding: 0.3rem 0.6rem; border-radius: 4px; font-size: 0.8rem;">جديد</div>
+                    <div style="position: absolute; top: 10px; left: 10px; display: flex; flex-direction: column; gap: 0.5rem;">
+                        <button style="background-color: var(--dark-surface); border: none; width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--text);">❤️</button>
+                        <button style="background-color: var(--dark-surface); border: none; width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--text);">🔍</button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">سماعات لاسلكية فاخرة</h3>
+                    <div style="display: flex; align-items: center; margin-bottom: 0.5rem;">
+                        <div style="display: flex; margin-left: 0.5rem;">
+                            <span style="color: gold;">★</span>
+                            <span style="color: gold;">★</span>
+                            <span style="color: gold;">★</span>
+                            <span style="color: gold;">★</span>
+                            <span style="color: var(--text-secondary);">★</span>
+                        </div>
+                        <span style="font-size: 0.8rem; color: var(--text-secondary);">(125)</span>
+                    </div>
+                    <p class="product-price">
+                        <span style="font-weight: bold;">299 ريال</span>
+                        <span style="text-decoration: line-through; color: var(--text-secondary); margin-right: 0.5rem; font-size: 0.9rem;">399 ريال</span>
+                        <span style="background-color: var(--secondary); color: var(--dark); padding: 0.2rem 0.4rem; border-radius: 4px; font-size: 0.7rem; margin-right: 0.5rem;">-25%</span>
+                    </p>
+                    <p class="product-description">سماعات لاسلكية بجودة صوت عالية وبطارية تدوم طويلاً</p>
+                    <div style="display: flex; gap: 0.5rem; margin-top: 1rem;">
+                        <button style="flex: 2; padding: 0.7rem; background-color: var(--primary); border: none; color: white; border-radius: 4px; cursor: pointer;">إضافة للسلة</button>
+                        <button style="flex: 1; padding: 0.7rem; background-color: var(--dark-surface); border: 1px solid var(--primary); color: var(--primary); border-radius: 4px; cursor: pointer;">شراء الآن</button>
+                    </div>
+                    <div style="display: flex; align-items: center; margin-top: 1rem;">
+                        <img src="https://i.pinimg.com/236x/02/29/94/022994b7530112a745a0acf2a7fd2f1b.jpg" style="width: 20px; height: 20px; margin-left: 0.5rem;">
+                        <span style="font-size: 0.8rem; color: var(--text-secondary);">شحن مجاني للطلبات أكثر من 200 ريال</span>
+                    </div>
+                    <div style="display: flex; justify-content: center; margin-top: 1rem;">
+                        <div style="display: flex; gap: 0.5rem;">
+                            <div style="width: 24px; height: 24px; border-radius: 50%; background-color: #000; cursor: pointer;"></div>
+                            <div style="width: 24px; height: 24px; border-radius: 50%; background-color: #6200EA; cursor: pointer;"></div>
+                            <div style="width: 24px; height: 24px; border-radius: 50%; background-color: #fff; border: 1px solid var(--gray); cursor: pointer;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="product">
+                <img src="https://i.pinimg.com/236x/e4/6d/1a/e46d1add185e813f4cc36b417128647f.jpg" alt="منتج" class="product-img">
+                <div class="product-info">
+                    <h3 class="product-title">ساعة ذكية رياضية</h3>
+                    <p class="product-price">450 ريال</p>
+                    <p class="product-description">ساعة ذكية متعددة الوظائف مقاومة للماء مع تتبع اللياقة البدنية</p>
+                    <button class="add-to-cart">إضافة للسلة</button>
+                </div>
+            </div>
+            <div class="product">
+                <img src="https://i.pinimg.com/474x/68/0a/61/680a61c1a40ee69c2b76daa969fc42ba.jpg" alt="منتج" class="product-img">
+                <div class="product-info">
+                    <h3 class="product-title">حقيبة ظهر عصرية</h3>
+                    <p class="product-price">199 ريال</p>
+                    <p class="product-description">حقيبة ظهر مريحة ومتينة مع مساحة كبيرة وتصميم أنيق</p>
+                    <button class="add-to-cart">إضافة للسلة</button>
+                </div>
+            </div>
+            <div class="product">
+                <img src="https://i.pinimg.com/736x/8c/8d/55/8c8d551f4c08a1317ae40e0ff61dbc88.jpg" alt="منتج" class="product-img">
+                <div class="product-info">
+                    <h3 class="product-title">كاميرا رقمية احترافية</h3>
+                    <p class="product-price">1999 ريال</p>
+                    <p class="product-description">كاميرا رقمية بدقة عالية مع عدسة واسعة وميزات متقدمة</p>
+                    <button class="add-to-cart">إضافة للسلة</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- خيارات الصفحات -->
+        <div class="pagination" style="display: flex; justify-content: center; margin-top: 3rem;">
+            <button style="width: 40px; height: 40px; background-color: var(--gray); color: var(--text); border: none; margin: 0 0.3rem; border-radius: 4px; cursor: pointer;">1</button>
+            <button style="width: 40px; height: 40px; background-color: var(--dark-surface); color: var(--text-secondary); border: 1px solid var(--gray); margin: 0 0.3rem; border-radius: 4px; cursor: pointer;">2</button>
+            <button style="width: 40px; height: 40px; background-color: var(--dark-surface); color: var(--text-secondary); border: 1px solid var(--gray); margin: 0 0.3rem; border-radius: 4px; cursor: pointer;">3</button>
+            <button style="width: 40px; height: 40px; background-color: var(--dark-surface); color: var(--text-secondary); border: 1px solid var(--gray); margin: 0 0.3rem; border-radius: 4px; cursor: pointer;">4</button>
+            <button style="width: 40px; height: 40px; background-color: var(--dark-surface); color: var(--text-secondary); border: 1px solid var(--gray); margin: 0 0.3rem; border-radius: 4px; cursor: pointer;">></button>
+        </div>
+    </section>
+
+    <section class="categories">
+        <div class="section-header">
+            <h2>تصفح حسب التصنيف</h2>
+        </div>
+        <div class="category-container">
+            <div class="category">
+                <img src="https://i.pinimg.com/236x/b4/d5/e3/b4d5e3a47472d0a6b2606dd065cb0f93.jpg" alt="إلكترونيات">
+                <div class="category-info">
+                    <h3 class="category-title">إلكترونيات</h3>
+                    <p class="category-count">120 منتج</p>
+                </div>
+            </div>
+            <div class="category">
+                <img src="https://i.pinimg.com/736x/de/93/6b/de936b160eff8804d047b3ec57b62b22.jpg" alt="أزياء">
+                <div class="category-info">
+                    <h3 class="category-title">أزياء</h3>
+                    <p class="category-count">85 منتج</p>
+                </div>
+            </div>
+            <div class="category">
+                <img src="https://i.pinimg.com/236x/9e/fb/b7/9efbb7738acff2956cb1d96e42d54a11.jpg" alt="منزل ومطبخ">
+                <div class="category-info">
+                    <h3 class="category-title">منزل ومطبخ</h3>
+                    <p class="category-count">95 منتج</p>
+                </div>
+            </div>
+            <div class="category">
+                <img src="https://i.pinimg.com/236x/57/30/f2/5730f2f9ac4e7e6d87a62a094ba86ae7.jpg" alt="رياضة">
+                <div class="category-info">
+                    <h3 class="category-title">رياضة</h3>
+                    <p class="category-count">70 منتج</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>متجرنا</h3>
+                <ul class="footer-links">
+                    <li><a href="#">من نحن</a></li>
+                    <li><a href="#">سياسة الخصوصية</a></li>
+                    <li><a href="#">شروط الاستخدام</a></li>
+                    <li><a href="#">الوظائف</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>خدمة العملاء</h3>
+                <ul class="footer-links">
+                    <li><a href="#">أسئلة متكررة</a></li>
+                    <li><a href="#">طرق الدفع</a></li>
+                    <li><a href="#">سياسة الإرجاع</a></li>
+                    <li><a href="#">تتبع الطلب</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>اتصل بنا</h3>
+                <p>الرياض، المملكة العربية السعودية</p>
+                <p>البريد الإلكتروني: info@matjarna.com</p>
+                <p>الهاتف: +966 12 345 6789</p>
+                <div class="social-links">
+                    <a href="#" class="social-icon">📱</a>
+                    <a href="#" class="social-icon">📸</a>
+                    <a href="#" class="social-icon">🐦</a>
+                    <a href="#" class="social-icon">👍</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>النشرة الإخبارية</h3>
+                <p>اشترك ليصلك كل جديد من العروض والخصومات</p>
+                <form>
+                    <input type="email" placeholder="أدخل بريدك الإلكتروني" style="width: 100%; padding: 10px; margin: 10px 0; background: var(--gray); border: none; color: white; border-radius: 4px;">
+                    <button type="submit" class="btn" style="width: 100%;">اشتراك</button>
+                </form>
+                
+                <h3 style="margin-top: 2rem;">طرق الدفع</h3>
+                <div style="display: flex; flex-wrap: wrap; gap: 0.7rem; margin-top: 1rem;">
+                    <div style="width: 45px; height: 30px; background-color: white; border-radius: 4px; display: flex; align-items: center; justify-content: center;">
+                        <span style="color: #000; font-weight: bold; font-size: 0.7rem;">VISA</span>
+                    </div>
+                    <div style="width: 45px; height: 30px; background-color: white; border-radius: 4px; display: flex; align-items: center; justify-content: center;">
+                        <span style="color: #000; font-weight: bold; font-size: 0.7rem;">MC</span>
+                    </div>
+                    <div style="width: 45px; height: 30px; background-color: white; border-radius: 4px; display: flex; align-items: center; justify-content: center;">
+                        <span style="color: #000; font-weight: bold; font-size: 0.7rem;">AMEX</span>
+                    </div>
+                    <div style="width: 45px; height: 30px; background-color: white; border-radius: 4px; display: flex; align-items: center; justify-content: center;">
+                        <span style="color: #000; font-weight: bold; font-size: 0.7rem;">MADA</span>
+                    </div>
+                    <div style="width: 45px; height: 30px; background-color: black; border-radius: 4px; display: flex; align-items: center; justify-content: center;">
+                        <span style="color: white; font-weight: bold; font-size: 0.7rem;">Pay</span>
+                    </div>
+                    <div style="width: 45px; height: 30px; background-color: #0066cc; border-radius: 4px; display: flex; align-items: center; justify-content: center;">
+                        <span style="color: white; font-weight: bold; font-size: 0.7rem;">PayPal</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2025 متجرنا. جميع الحقوق محفوظة.
+        </div>
+    </footer>
+</body>
+</html>
